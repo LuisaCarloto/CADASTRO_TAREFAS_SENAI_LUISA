@@ -1,5 +1,5 @@
 :root {
-    --gradiente-fundo: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --gradiente-fundo: linear-gradient(135deg, #FFD6C0 0%, #DCC6FF 100%);
     --fundo-cartao: #ffffff;
     --cor-texto: #2d3748;
     --cor-primaria: #6c5ce7;
@@ -11,7 +11,7 @@
 
 /* modo escuro */
 body.modo-escuro {
-    --gradiente-fundo: linear-gradient(135deg, #2d3748 0%, #1a202c 100%; );
+    --gradiente-fundo: linear-gradient(135deg, #162A3A 0%, #4B315E 100%);
     --fundo-cartao: #1a202c;
     --cor-texto: #f7fafc;
     --cor-borda: #4a5568;
@@ -22,7 +22,7 @@ body.modo-escuro {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: background 0.3s, color 0.3;
+    transition: background 0.3s, color 0.3s;
 }
 
 body {
@@ -115,7 +115,7 @@ input[type="text"]:focus {
     background: var(--cor-borda);
     border-radius: 10px;
     margin-bottom: 10px;
-    animation: aparecer 0.3s esse;
+    animation: aparecer 0.3s ease;
 }
 
 .item-tarefa.concluida span {
@@ -150,4 +150,32 @@ input[type="text"]:focus {
 @keyframes aparecer{
     from{opacity: 0; transform: translateY(10px);}
     to{opacity: 1; transform: translateY(0px);}
+}
+.grupo-imagens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 10px auto;
+}
+
+.imagem-anavitoria {
+    width: 70px !important;
+    height: 70px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.imagem-mabel {
+    width: 70px !important;
+    height: 70px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.imagem-luisa {
+    width: 70px !important;
+    height: 70px !important;
+    border-radius: 50%;
+    object-fit: cover;
 }
