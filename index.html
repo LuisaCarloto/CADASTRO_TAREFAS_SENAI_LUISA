@@ -1,44 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu paineil de tarefas</title>
+    <title>Meu painel de tarefas</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div class="cartao-aplicacao">
         <header class="cabecalho-aplicacao">
-            <h1>Minhas tarefas🦕​​</h1>
+            <h1>Minhas tarefas🦕</h1>
             <!-- botão da lua -->
             <button id="botao-tema" class="botao-principal">
                 <i class="fa-solid fa-moon"></i>
             </button>
-         </header>
+        </header>
+
         <div class="caixa-entrada">
             <input type="text" id="campo-tarefa" placeholder="O que vamos fazer hoje?.." maxlength="40">
             <button id="botao-adicionar" class="botao-principal">
-                <i class="fa-solid fa-plus"></i>Adicionar</button>
-         </div>
+                <i class="fa-solid fa-plus"></i>Adicionar
+            </button>
+        </div>
+
         <ul id="lista-tarefas" class="lista-tarefas">
-            <!-- As tarefas serão inseridas aqui dinamicamente via JS -->
         </ul>
 
+        <!-- imagens -->
         <div class="grupo-imagens">
+            <button id="botao-anavitoria" class="botao-foto" title="Clique para soltar borboletas!">
+                <img src="anavitoria.png" alt="imagem-anavitoria" class="imagem-anavitoria">
+            </button>
 
-    <img src="anavitoria.png" alt="imagem-anavitoria" class="imagem-anavitoria">
+            <button id="botao-mabel" class="botao-foto" title="Clique">
+                <img src="mabel.png" alt="imagem-mabel" class="imagem-mabel">
+            </button>
 
-    <img src="mabel.png" alt="imagem-mabel" class="imagem-mabel">
+            <button id="botao-luisa" class="botao-foto" title="Clique">
+                <img src="luisa.png" alt="imagem-luisa" class="imagem-luisa">
+            </button>
+        </div>
 
-    <img src="luisa.png" alt="imagem-luisa" class="imagem-luisa">
-
-</div>
         <footer class="rodape-aplicacao">
             <span id="contador-tarefas">0 tarefas na lista</span>
         </footer>
     </div>
 
+    <!-- botão de alerta e badge -->
+    <div class="area-badge">
+        <button id="botao-alerta" class="botao-alerta" aria-expanded="false" aria-controls="painel-alteracoes">
+            🚨
+            <span class="badge">NOVO</span>
+        </button>
+
+        <!-- painel com as alterações -->
+        <div id="painel-alteracoes" class="painel-alteracoes" hidden>
+            <div class="cabecalho-painel">
+                <h2>🚨</h2>
+                <button id="botao-fechar" class="botao-fechar">&times;</button>
+            </div>
+
+            <ul>
+                <li>🦇 Coloquei morcegos quando clica em mim</li>
+                <li>🌈 Coloquei arco-Iris quando clica na Mabel</li>
+                <li>🦋 Coloquei borboletas quando clin ana Anavitória</li>
+            </ul>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-</html> 
+
+</html>

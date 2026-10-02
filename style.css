@@ -72,13 +72,14 @@ body {
 
 input[type="text"] {
     flex: 1;
+    min-width: 0;
     padding: 12px 15px;
     border: 2px solid var(--cor-borda);
     border-radius: 12px;
     outline: none;
     font-size: 0.95rem;
     background: transparent;
-    color: var(--cor-texto)
+    color: var(--cor-texto);
 }
 
 input[type="text"]:focus {
@@ -111,11 +112,17 @@ input[type="text"]:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
     padding: 12px;
     background: var(--cor-borda);
     border-radius: 10px;
     margin-bottom: 10px;
     animation: aparecer 0.3s ease;
+}
+
+.item-tarefa span {
+    overflow-wrap: anywhere;
+    cursor: pointer;
 }
 
 .item-tarefa.concluida span {
@@ -136,46 +143,218 @@ input[type="text"]:focus {
     color: var(--cor-texto);
 }
 
-.botao-acao.excluir:hover{
-    color:var(--cor-perigo);
+.botao-acao.excluir:hover {
+    color: var(--cor-perigo);
 }
 
-.rodape-aplicacao{
+.rodape-aplicacao {
     margin-top: 15px;
     font-size: 0.85rem;
     color: var(--cor-concluido);
     text-align: center;
 }
 
-@keyframes aparecer{
-    from{opacity: 0; transform: translateY(10px);}
-    to{opacity: 1; transform: translateY(0px);}
+/* ANIMAÇÃO DAS TAREFAS */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
+
+/* IMAGENS NA MESMA LINHA */
 .grupo-imagens {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 8px;
+    width: 100%;
     margin: 10px auto;
 }
 
-.imagem-anavitoria {
-    width: 70px !important;
-    height: 70px !important;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.imagem-mabel {
-    width: 70px !important;
-    height: 70px !important;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
+.imagem-anavitoria,
+.imagem-mabel,
 .imagem-luisa {
-    width: 70px !important;
-    height: 70px !important;
+    display: block;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+/* BOTÕES DAS FOTOS */
+.botao-foto {
+    display: block;
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.botao-foto:hover {
+    transform: scale(1.08);
+}
+
+/* Botão no canto*/
+.area-badge {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* BOTÃO DE ALERTA */
+.botao-alerta {
+    position: relative;
+    background: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.botao-alerta:hover {
+    background: var(--cor-primaria-destaque);
+    transform: scale(1.08);
+}
+
+/* bagde novo */
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -12px;
+    background: #ff4d6d;
+    color: white;
+    padding: 4px 6px;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+.texto-badge {
+    display: none;
+}
+
+/* PAINEL COM AS ALTERAÇÕES */
+.painel-alteracoes {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    width: 300px;
+    max-width: calc(100vw - 30px);
+    padding: 15px;
+    background: var(--fundo-cartao);
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-concluido);
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: aparecer 0.3s ease;
+}
+
+/* GARANTE QUE O PAINEL FIQUE ESCONDIDO QUANDO FECHADO */
+.painel-alteracoes[hidden] {
+    display: none;
+}
+
+.cabecalho-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.cabecalho-painel h2 {
+    font-size: 1.1rem;
+}
+
+.botao-fechar {
+    background: transparent;
+    border: none;
+    color: var(--cor-texto);
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.painel-alteracoes ul {
+    padding-left: 20px;
+}
+
+.painel-alteracoes li {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* EMOJIS VOANDO */
+.efeito-voando {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    animation: voar 3s ease-out forwards;
+}
+
+/* MOVIMENTO DOS EMOJIS */
+@keyframes voar {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(var(--movimento-x), -150px) rotate(var(--rotacao)) scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--movimento-x), -300px) rotate(var(--rotacao)) scale(0.8);
+    }
+}
+
+/* AJUSTES PARA TELAS PEQUENAS */
+@media (max-width: 380px) {
+    .cartao-aplicacao {
+        padding: 20px;
+    }
+
+    .grupo-imagens {
+        gap: 5px;
+    }
+
+    .botao-foto {
+        width: 60px;
+        height: 60px;
+    }
+
+    .imagem-anavitoria,
+    .imagem-mabel,
+    .imagem-luisa {
+        width: 60px;
+        height: 60px;
+    }
+
+    .area-badge {
+        right: 15px;
+        bottom: 15px;
+    }
 }
