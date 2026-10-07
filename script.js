@@ -33,6 +33,31 @@ const botaoLuisa = document.getElementById("botao-luisa");
 const botaoAna = document.getElementById("botao-anavitoria");
 
 
+// SALVA AS TAREFAS NO LOCALSTORAGE
+function salvarNoLocalStorage() {
+    localStorage.setItem("tarefas", JSON.stringify(listaDeTarefas));
+}
+
+// CARREGA AS TAREFAS SALVAS
+function carregarDoLocalStorage() {
+    const tarefasSalvas = localStorage.getItem("tarefas");
+
+    if (tarefasSalvas) {
+        const tarefas = JSON.parse(tarefasSalvas);
+
+        tarefas.forEach(function (tarefa) {
+            const novaTarefa = new Tarefa(tarefa.nome);
+
+            novaTarefa.pronta = tarefa.pronta;
+
+            listaDeTarefas.push(novaTarefa);
+        });
+    }
+
+    renderizarLista();
+}
+
+
 // MODO ESCURO / MODO CLARO
 botaoTema.addEventListener("click", function () {
     document.body.classList.toggle("modo-escuro");
@@ -55,6 +80,8 @@ botaoAdicionar.addEventListener("click", function () {
         listaDeTarefas.push(novaTarefa);
 
         campoTarefa.value = "";
+
+        salvarNoLocalStorage();
         renderizarLista();
 
     } catch (erro) {
@@ -112,14 +139,18 @@ function renderizarLista() {
     atualizarContador();
 }
 
-// clica na terfa e mostra se ela ta pronta ou não, no caso ela fica cinza e riscada
+// clica na tarefa e mostra se ela ta pronta ou não, no caso ela fica cinza e riscada
 function marcarTarefa(index) {
     listaDeTarefas[index].marcarComoPronta();
+
+    salvarNoLocalStorage();
     renderizarLista();
 }
 
 function removerTarefa(index) {
     listaDeTarefas.splice(index, 1);
+
+    salvarNoLocalStorage();
     renderizarLista();
 }
 
@@ -131,7 +162,7 @@ function atualizarContador() {
         `${quantidade} ${quantidade === 1 ? "tarefa" : "tarefas"} na lista`;
 }
 
-// é onde abe e fecha o painelzinho de alterações
+// é onde abre e fecha o painelzinho de alterações
 botaoAlerta.addEventListener("click", function () {
     const estaAberto = !painelAlteracoes.hidden;
 
@@ -140,7 +171,7 @@ botaoAlerta.addEventListener("click", function () {
     botaoAlerta.setAttribute("aria-expanded", String(!estaAberto));
 });
 
-// Meszma coisa do enter, soq aqui quando eu clico no x que aparece, ele sai da tabelinha de alterações
+// Mesma coisa do enter, soq aqui quando eu clico no x que aparece, ele sai da tabelinha de alterações
 botaoFechar.addEventListener("click", function () {
     painelAlteracoes.hidden = true;
 
@@ -198,3 +229,7 @@ botaoMabel.addEventListener("click", function () {
 botaoAna.addEventListener("click", function () {
     soltarEfeitos("🦋", botaoAna);
 });
+
+
+// CARREGA AS TAREFAS SALVAS QUANDO ABRIR A PÁGINA
+carregarDoLocalStorage();
